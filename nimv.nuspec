@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>nimv</id>
+    <version>0.0.1</version>
+    <title>nimv</title>
+    <authors>Eric Mastro</authors>
+    <projectUrl>https://github.com/emizzle/nimv</projectUrl>
+    <licenseUrl>https://github.com/emizzle/nimv/blob/main/LICENSE</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Simple nim version manager</description>
+    <tags>nim version management</tags>
+    <dependencies>
+      <dependency id="git" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
