@@ -32,7 +32,7 @@ cd /d "%INITIAL_DIR%"
 exit /b 1
 
 :help
-echo Usage: %~n0%~x0 ^<command^|version-tag^>
+echo Usage: nimv ^<command^|version-tag^>
 echo.
 echo Commands:
 echo   installed      List all installed Nim versions
@@ -45,8 +45,8 @@ echo Parameters:
 echo   version-tag    The Nim version to install (e.g., v2.0.14, v2.2.0)
 echo.
 echo Examples:
-echo   %~n0%~x0 v2.0.14     Install Nim version 2.0.14
-echo   %~n0%~x0 installed   List installed versions
+echo   nimv v2.0.14     Install Nim version 2.0.14
+echo   nimv installed   List installed versions
 cd /d "%INITIAL_DIR%"
 exit /b 0
 
