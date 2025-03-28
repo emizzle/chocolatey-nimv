@@ -14,7 +14,7 @@ set "USER_HOME=%USERPROFILE%"
 
 :: Set up colors and symbols based on environment
 set "GREEN=[92m"
-set "RED=[91"
+set "RED=[91m"
 set "YELLOW=[93m"
 set "CYAN=[96m"
 set "NC=[0m"
@@ -276,14 +276,12 @@ set "has_error=false"
 
 :: Check nim binary
 for /f "tokens=*" %%v in ('bash -c "nimv current 2>/dev/null"') do set "current_version=%%v"
+for /f "tokens=*" %%i in ('bash -c "which nim 2>/dev/null"') do set "nim_path=%%i"
 if "%current_version%"=="No version currently selected" (
     call :show_status "Checking nim binary platform matches current platform" "failure"
     echo   Error: No nim version currently selected
     set "has_error=true"
-)
-
-for /f "tokens=*" %%i in ('bash -c "which nim 2>/dev/null"') do set "nim_path=%%i"
-if "%nim_path%"=="" (
+) else if "%nim_path%"=="" (
     call :show_status "Checking nim binary platform matches current platform" "failure"
     echo   Error: nim not found in PATH
     set "has_error=true"
@@ -295,7 +293,11 @@ if "%nim_path%"=="" (
 :: Check nim version matches
 for /f "tokens=*" %%v in ('bash -c "nim --version 2>/dev/null | head -n1 | sed 's/Nim Compiler Version \([0-9.]*\).*/\1/'"') do set "nim_version=%%v"
 
-if "%nim_version%"=="" (
+if "%current_version%"=="No version currently selected" (
+    call :show_status "Checking nim binary version matches nim version selected with nimv" "failure"
+    echo   Error: No nim version currently selected
+    set "has_error=true"
+) else if "%nim_version%"=="" (
     call :show_status "Checking nim binary version matches nim version selected with nimv" "failure"
     echo   Error: Could not determine Nim version
     set "has_error=true"
