@@ -106,47 +106,6 @@ for %%b in (nim.exe nim-gdb.exe nimble.exe nimgrep.exe nimpretty.exe nimsuggest.
     if exist "%nimble_dir%\%%b" del "%nimble_dir%\%%b"
     if exist "%bin_dir%\%%b" mklink "%nimble_dir%\%%b" "%bin_dir%\%%b"
 )
-
-:: Check if .nimble/bin is in PATH
-set "NIMBLE_BIN_PATH=%USER_HOME%\.nimble\bin"
-
-:: Detect environment
-set "IS_MSYS2="
-if defined MSYSTEM set "IS_MSYS2=1"
-
-:: Convert Windows path to Unix-style for MSYS2 if needed
-if defined IS_MSYS2 (
-    set "NIMBLE_BIN_PATH=%USER_HOME:\=/%/.nimble/bin"
-)
-
-:: Check PATH
-if defined IS_MSYS2 (
-    echo ";%PATH%;" | grep -q "%NIMBLE_BIN_PATH%"
-    if !ERRORLEVEL! neq 0 (
-        set "PATH=%NIMBLE_BIN_PATH%:!PATH!"
-        echo.
-        echo Note: %NIMBLE_BIN_PATH% has been added to PATH for this session
-        echo To add it permanently in MSYS2:
-        echo   1. Edit your shell configuration file ^(e.g., ~/.bashrc or ~/.bash_profile^)
-        echo   2. Add the line: export PATH=\"%NIMBLE_BIN_PATH%:\$PATH\"
-        echo   3. Restart your terminal or run: source ~/.bashrc
-    )
-) else (
-    echo ";%PATH%;" | findstr /I /C:"%NIMBLE_BIN_PATH%" >nul
-    if errorlevel 1 (
-        set "PATH=%NIMBLE_BIN_PATH%;%PATH%"
-        echo.
-        echo Note: %NIMBLE_BIN_PATH% has been added to PATH for this session
-        echo To add it permanently in Windows Command Prompt:
-        echo   1. Open System Properties ^(Windows + Pause/Break^)
-        echo   2. Click "Advanced system settings"
-        echo   3. Click "Environment Variables"
-        echo   4. Under "User variables for %USERNAME%", find "Path"
-        echo   5. Click "Edit" and add: %NIMBLE_BIN_PATH%
-        echo   6. Click OK on all windows
-        echo   7. Restart any open terminals
-    )
-)
 exit /b 0
 
 :available
