@@ -2,7 +2,7 @@
 setlocal EnableDelayedExpansion
 
 :: Script version and immediate command handling
-set "VERSION=0.0.4"
+set "VERSION=0.0.8"
 if "%~1"=="--version" (
     echo %VERSION%
     exit /b 0
