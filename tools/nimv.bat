@@ -275,6 +275,13 @@ exit /b 0
 set "has_error=false"
 
 :: Check nim binary
+for /f "tokens=*" %%v in ('bash -c "nimv current 2>/dev/null"') do set "current_version=%%v"
+if "%current_version%"=="No version currently selected" (
+    call :show_status "Checking nim binary platform matches current platform" "failure"
+    echo   Error: No nim version currently selected
+    set "has_error=true"
+)
+
 for /f "tokens=*" %%i in ('bash -c "which nim 2>/dev/null"') do set "nim_path=%%i"
 if "%nim_path%"=="" (
     call :show_status "Checking nim binary platform matches current platform" "failure"
@@ -287,7 +294,6 @@ if "%nim_path%"=="" (
 
 :: Check nim version matches
 for /f "tokens=*" %%v in ('bash -c "nim --version 2>/dev/null | head -n1 | sed 's/Nim Compiler Version \([0-9.]*\).*/\1/'"') do set "nim_version=%%v"
-for /f "tokens=*" %%v in ('bash -c "nimv current 2>/dev/null"') do set "current_version=%%v"
 
 if "%nim_version%"=="" (
     call :show_status "Checking nim binary version matches nim version selected with nimv" "failure"
