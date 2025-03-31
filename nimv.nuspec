@@ -34,12 +34,12 @@ This is a nuspec. It mostly adheres to https://docs.nuget.org/create/Nuspec-Refe
 
     <!-- == SOFTWARE SPECIFIC SECTION == -->
     <!-- This section is about the software itself -->
-    <title>nimv</title>
+    <title>nim version manager</title>
     <authors>Eric Mastro</authors>
     <!-- projectUrl is required for the community feed -->
     <projectUrl>https://github.com/emizzle/nimv</projectUrl>
     <iconUrl>https://rawcdn.githack.com/nim-lang/Nim/master/doc/logo.svg</iconUrl>
-    <copyright>2025</copyright>
+    <copyright>2025 nimv Eric Mastro</copyright>
     <!-- If there is a license Url available, it is required for the community feed -->
     <licenseUrl>https://github.com/emizzle/nimv/blob/main/LICENSE</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
